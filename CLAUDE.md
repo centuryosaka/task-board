@@ -4,7 +4,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-タスクボードアプリケーション。
+React + TypeScript + Vite で構築したタスクボードアプリケーション。
+
+## 開発コマンド
+
+```powershell
+npm install       # 依存パッケージインストール
+npm run dev       # 開発サーバー起動（http://localhost:5173）
+npm run build     # プロダクションビルド
+npm run preview   # ビルド結果のプレビュー
+```
+
+## アーキテクチャ
+
+単一コンポーネント構成。状態管理は React の `useState` のみ使用。
+
+- [src/App.tsx](src/App.tsx) — タスクの追加・完了切り替え・削除ロジックと UI をすべて管理
+- [src/App.css](src/App.css) — スタイル定義（完了タスクのグレーアウトは `.task-item.completed` クラスで制御）
+
+タスクは `{ id: number, text: string, completed: boolean }` 型で管理し、ページリロードで初期化される（永続化なし）。
 
 ## Git 運用ルール
 
@@ -13,9 +31,5 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```powershell
 git add <変更したファイル>
 git commit -m "変更内容を簡潔に記述"
-git push origin <ブランチ名>
+git push origin main
 ```
-
-- `git add .` は使わず、変更ファイルを明示的に指定する
-- コミットメッセージは日本語で変更内容がわかるように書く
-- プッシュ前に `git status` で変更内容を確認する
